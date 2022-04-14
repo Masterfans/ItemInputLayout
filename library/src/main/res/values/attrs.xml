@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ItemInputLayout">
+        <attr name="contentText" format="string" />
+        <attr name="label" format="string" />
+        <attr name="contentColor" format="color|reference" />
+        <attr name="labelColor" format="color|reference" />
+        <attr name="inputable" format="boolean" />
+        <attr name="contentClickable" format="boolean"/>
+        <attr name="strSize" format="dimension" />
+        <attr name="padding" format="dimension" />
+        <attr name="contentMarginStart" format="dimension" />
+        <attr name="labelWidth" format="dimension" />
+        <attr name="labelSuffix" format="string"/>
+        <attr name="required" format="boolean"/>
+        <attr name="content_gravity">
+            <enum name="start" value="0" />
+            <enum name="center" value="1" />
+            <enum name="end" value="2" />
+        </attr>
+        <attr name="hint" format="string"/>
+    </declare-styleable>
+</resources>

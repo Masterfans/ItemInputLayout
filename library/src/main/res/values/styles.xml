@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.AppTheme.ItemInputView" parent="">
+        <item name="contentColor">@color/gary66</item>
+        <item name="strSize">14sp</item>
+        <item name="padding">15dp</item>
+        <item name="label">"label"</item>
+        <item name="inputable">true</item>
+        <item name="contentMarginStart">80dp</item>
+        <item name="contentText">""</item>
+        <item name="content_gravity">start</item>
+    </style>
+
+    <style name="Natural" parent="">
+        <item name="labelColor">@color/gary66</item>
+        <item name="contentColor">@color/black</item>
+        <item name="strSize">14sp</item>
+        <item name="padding">0dp</item>
+        <item name="label">""</item>
+        <item name="inputable">false</item>
+        <item name="contentClickable">false</item>
+        <item name="contentMarginStart">0dp</item>
+        <item name="contentText">""</item>
+        <item name="content_gravity">start</item>
+    </style>
+
+    <style name="ItemClickable">
+        <item name="contentClickable">true</item>
+        <item name="inputable">false</item>
+    </style>
+
+    <style name="ItemNoClick">
+        <item name="contentClickable">false</item>
+        <item name="inputable">false</item>
+    </style>
+
+    <style name="ItemLabelClick" parent="ItemLabel">
+        <item name="contentClickable">true</item>
+        <item name="inputable">false</item>
+    </style>
+
+    <style name="ItemLabel">
+        <item name="labelColor">@color/color_2</item>
+        <item name="contentColor">@color/color_2</item>
+        <item name="padding">2dp</item>
+        <item name="contentMarginStart">75dp</item>
+        <item name="inputable">false</item>
+        <item name="contentClickable">false</item>
+    </style>
+
+    <style name="ItemLabelSuffix" parent="ItemLabel">
+        <item name="labelSuffix">@string/colon</item>
+    </style>
+</resources>

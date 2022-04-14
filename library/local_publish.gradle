@@ -1,0 +1,84 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier = 'sources'
+}
+afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                artifact "build/outputs/aar/${project.name}-release.aar"
+                artifact sourceJar
+
+                groupId GROUP_ID
+                artifactId ARTIFACT_ID
+                version VERSION
+
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode("dependencies")
+                    configurations.implementation.allDependencies.forEach() {
+                        Dependency dependency ->
+                            if (dependency.version != "unspecified" && dependency.name != "unspecified") {
+                                def dependencyNode = dependenciesNode.appendNode('dependency')
+                                dependencyNode.appendNode('groupId', dependency.group)
+                                dependencyNode.appendNode('artifactId', dependency.name)
+                                dependencyNode.appendNode('version', dependency.version)
+                            }
+                    }
+                }
+//                versionMapping {
+//                    usage('java-api') {
+//                        fromResolutionOf('runtimeClasspath')
+//                    }
+//                    usage('java-runtime') {
+//                        fromResolutionResult()
+//                    }
+//                }
+                pom {
+                    name = 'loadLayout'
+                    description = 'loadLayout'
+                    url = 'https://github.com/Masterfans/ItemInputLayout'
+
+                    scm {
+                        connection = 'scm:git:https://github.com/Masterfans/ItemInputLayout.git'
+                        developerConnection = 'scm:git:https://github.com/Masterfans/ItemInputLayout.git'
+                        url = 'https://github.com/Masterfans/ItemInputLayout'
+                    }
+
+                    developers {
+                        developer {
+                            id = 'jrobot'
+                            name = 'jrobot'
+                            email = 'masterr_robot@163.com'
+                        }
+                    }
+
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                }
+            }
+        }
+        repositories {
+            mavenLocal()
+            maven {
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots"
+                // 如果version以SNAPSHOT结尾就会上传到快照仓库，如果不是就上传到release仓库
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                credentials {
+                    username = "${NEXUS_USERNAME}"
+                    password = "${NEXUS_PASSWORD}"
+                }
+            }
+        }
+    }
+}
+signing {
+    sign publishing.publications
+}
