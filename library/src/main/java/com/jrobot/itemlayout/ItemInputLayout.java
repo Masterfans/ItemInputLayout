@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -59,7 +60,7 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
     }
 
     private void init(AttributeSet attrs, int defStyleAttr) {
-        LayoutInflater.from(getContext()).inflate(R.layout.item_edit, this);
+        LayoutInflater.from(getContext()).inflate(R.layout._item_input_layout_, this);
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ItemInputLayout, defStyleAttr, R.style.Widget_AppTheme_ItemInputView);
         int padding = (int) a.getDimension(R.styleable.ItemInputLayout_padding, 15);
         int textSize = a.getDimensionPixelSize(R.styleable.ItemInputLayout_strSize, 15);
@@ -103,7 +104,7 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
         mLabelView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mLabelView.setTextColor(labelColor);
         updateLabelText();
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mLabelView.getLayoutParams();
+        ViewGroup.LayoutParams params =  mLabelView.getLayoutParams();
         if (labelWidth != 0) {
             params.width = labelWidth;
         }
