@@ -3,13 +3,13 @@ package com.jrobot.item;
 import androidx.lifecycle.MutableLiveData;
 
 public class Data {
-  private MutableLiveData<String> content = new MutableLiveData<>();
+    private String content;
 
-  public MutableLiveData<String> getContent() {
-    return content;
-  }
+    public String getContent() {
+        return content;
+    }
 
-  public void setContent(MutableLiveData<String> content) {
-    this.content = content;
-  }
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

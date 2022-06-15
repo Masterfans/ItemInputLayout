@@ -35,7 +35,7 @@ import androidx.databinding.InverseBindingMethods;
 )
 public class ItemInputLayout extends LinearLayout implements TextWatcher {
     private CharSequence labelText;
-    private String contentText;
+    private CharSequence contentText;
     private TextView mLabelView;
     private EditText mEditText;
     private boolean canInput = false;
@@ -43,6 +43,7 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
     private boolean contentClickable = false;
     private CharSequence labelSuffix;
     private boolean required;
+    private int contentMaxLines;
 
     public ItemInputLayout(Context context) {
         super(context);
@@ -69,6 +70,8 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
         int contentColor = a.getColor(R.styleable.ItemInputLayout_contentColor, getResources().getColor(R.color.gary66));
         int labelColor = a.getColor(R.styleable.ItemInputLayout_labelColor, getResources().getColor(R.color.gary66));
         contentClickable = a.getBoolean(R.styleable.ItemInputLayout_contentClickable, contentClickable);
+        contentMaxLines = a.getInteger(R.styleable.ItemInputLayout_contentMaxLines, -1);
+
         CharSequence hint = a.getString(R.styleable.ItemInputLayout_hint);
 
         if (hint == null) {
@@ -104,7 +107,7 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
         mLabelView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mLabelView.setTextColor(labelColor);
         updateLabelText();
-        ViewGroup.LayoutParams params =  mLabelView.getLayoutParams();
+        ViewGroup.LayoutParams params = mLabelView.getLayoutParams();
         if (labelWidth != 0) {
             params.width = labelWidth;
         }
@@ -131,6 +134,9 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
                 return v.onTouchEvent(event);
             }
         });
+
+        updateMaxLines();
+
         mEditText.addTextChangedListener(this);
         ConstraintLayout.LayoutParams mEditTextLayoutParams = (ConstraintLayout.LayoutParams) mEditText.getLayoutParams();
         int gravity = -1;
@@ -155,6 +161,22 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
             mEditText.setMaxLines(1);
         }
         setOrientation(LinearLayout.HORIZONTAL);
+    }
+
+    public void setContentMaxLines(int contentMaxLines) {
+        this.contentMaxLines = contentMaxLines;
+        updateMaxLines();
+    }
+
+    public int getContentMaxLines() {
+        contentMaxLines = mEditText.getMaxLines();
+        return contentMaxLines;
+    }
+
+    private void updateMaxLines() {
+        if (contentMaxLines != -1) {
+            mEditText.setMaxLines(contentMaxLines);
+        }
     }
 
     private void updateLabelText() {
@@ -217,7 +239,7 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
     }
 
     @BindingAdapter("contentText")
-    public static void setContentText(ItemInputLayout view, String text) {
+    public static void setContentText(ItemInputLayout view, CharSequence text) {
         view.setContentText(text);
     }
 
@@ -232,6 +254,7 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
     }
 
     public void setContentText(CharSequence text) {
+        contentText = text;
         mEditText.setText(text);
         notifyContextChanged();
     }
@@ -262,6 +285,7 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
+//        contentText = s;
         notifyContextChanged();
     }
 }

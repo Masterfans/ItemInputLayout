@@ -8,6 +8,10 @@
         <variable
             name="data"
             type="com.jrobot.item.Data" />
+
+        <variable
+            name="mode"
+            type="com.jrobot.item.Model" />
     </data>
 
     <LinearLayout
@@ -28,9 +32,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.jrobot.itemlayout.ItemInputLayout
+            android:id="@+id/test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#1111"
+            app:contentMaxLines="1"
             app:contentText="@={data.content}"
             app:hint="点击输入"
             app:inputable="true"
