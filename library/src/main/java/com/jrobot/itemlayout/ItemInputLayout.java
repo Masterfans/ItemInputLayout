@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -176,6 +177,13 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
     private void updateMaxLines() {
         if (contentMaxLines != -1) {
             mEditText.setMaxLines(contentMaxLines);
+            int inputType = mEditText.getInputType();
+            if (contentMaxLines == 1) {
+                inputType ^= EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE;
+            } else if (contentMaxLines > 1) {
+                inputType |= EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE;
+            }
+            mEditText.setInputType(inputType);
         }
     }
 

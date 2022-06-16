@@ -38,7 +38,19 @@
             android:background="#1111"
             app:contentMaxLines="1"
             app:contentText="@={data.content}"
-            app:hint="点击输入"
+            app:hint="单行输入"
+            app:inputable="true"
+            app:label="姓名"
+            app:labelSuffix=":"
+            app:required="true" />
+
+        <com.jrobot.itemlayout.ItemInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1111"
+            app:contentMaxLines="2"
+            app:contentText="@={data.content}"
+            app:hint="多行输入"
             app:inputable="true"
             app:label="姓名"
             app:labelSuffix=":"
