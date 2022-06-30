@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        binding.testName.setLabelSuffix("_");
+        binding.testName.setRequired(true);
 
         Data data = new Data();
 

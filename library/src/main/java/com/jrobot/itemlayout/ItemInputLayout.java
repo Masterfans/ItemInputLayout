@@ -174,6 +174,24 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
         return contentMaxLines;
     }
 
+    public CharSequence getLabelSuffix() {
+        return labelSuffix;
+    }
+
+    public void setLabelSuffix(CharSequence labelSuffix) {
+        this.labelSuffix = labelSuffix;
+        updateLabelText();
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
+        updateLabelText();
+    }
+
     private void updateMaxLines() {
         if (contentMaxLines != -1) {
             mEditText.setMaxLines(contentMaxLines);
@@ -193,7 +211,7 @@ public class ItemInputLayout extends LinearLayout implements TextWatcher {
             str = str.concat(labelSuffix.toString());
         }
         if (required) {
-            mLabelView.setText(Html.fromHtml(getContext().getString(R.string.required, str)));
+            mLabelView.setText(Html.fromHtml(getContext().getString(R.string.item_required, str)));
         } else {
             mLabelView.setText(str);
         }

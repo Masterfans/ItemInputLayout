@@ -57,13 +57,12 @@
             app:required="true" />
 
         <com.jrobot.itemlayout.ItemInputLayout
+            android:id="@+id/testName"
             style="@style/ItemLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#1111"
-            app:label="姓名"
-            app:labelSuffix=":"
-            app:required="true" />
+            app:label="姓名" />
 
         <com.jrobot.itemlayout.ItemInputLayout
             style="@style/ItemLabelSuffix"
